@@ -6,22 +6,17 @@ This is a simple brainstorming space, powered by the github frontend, a github a
 
 # Setup
 
-1. Fork this repository
-2. Click on the "Actions" tab and activate github action workflows on your fork.
-3. Change the name of `README.stub.template` to `README.stub`
-4. Go to lines 54 through 66 in (./scripts/update_readme.py) and change the tag badge colors to your liking
-
-<!--
-2. Set "write" access on your `${{ secrets.GITHUB_TOKEN }}`, [instructions](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#configuring-the-default-github_token-permissions) here.
--->
-
+1. Click on the "Use this template" button in the top-right to create a new repo based on this one
+2. In your repo's settings, give github actions write permissions
+3. Change the name of `README.stub.template` to `README.stub`, and change its heading to your liking
+4. Go to lines 54 through 66 in [this script](scripts/update_readme.py) and change the tag badge colors to your liking
 
 # Usage
 
-1. Select `Add File > Create New File` to add a new markdown file containing the idea you want to log. Let's call this an "article".
+1. Add markdown files to the repo's root folder
 2. Upon committing, a github action runs which builds the README, which is customizable from a template.
 
-The generated `README.md` will contain a Table of Contents of your articles, and supports the following features:
+The generated `README.md` will contain a Table of Contents of your notes, and supports the following features:
 
 * Infers modification date from commit history
 * Sort most recently modified ideas at the top
@@ -29,9 +24,12 @@ The generated `README.md` will contain a Table of Contents of your articles, and
 * Custom tagging
 * Wikipedia-esque "category" pages which group articles by tag
 
+It'll look something like this:
+![example_toc](example_toc.png)
+
 ### Rules to keep stuff from breaking
 
-1. Article filenames contain no whitespace and use the `.md` suffix
+1. Note filenames contain no whitespace and use the `.md` suffix
 2. Define each note's title and tags with YAML frontmatter
 
 # FAQ
