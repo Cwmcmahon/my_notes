@@ -30,7 +30,7 @@ The table of contents will look something like this:
 
 And tag pages will look something like this:
 
-![example_tag_page](example_tag_page.png]
+![example_tag_page](example_tag_page.png)
 
 ### Rules to keep stuff from breaking
 
