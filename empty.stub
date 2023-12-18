@@ -24,8 +24,13 @@ The generated `README.md` will contain a Table of Contents of your notes, and su
 * Custom tagging
 * Wikipedia-esque "category" pages which group articles by tag
 
-It'll look something like this:
+The table of contents will look something like this:
+
 ![example_toc](example_toc.png)
+
+And tag pages will look something like this:
+
+![example_tag_page](example_tag_page.png]
 
 ### Rules to keep stuff from breaking
 
