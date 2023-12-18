@@ -51,7 +51,10 @@ for fpath in md_files:
 
 tag_counts = dict(sorted(tag_counts.items(), key = lambda x:len(x[1]), reverse = True))
 
+# Change the hex color below to pick a default tag badge color
 tag_colors = defaultdict(lambda: 'a89984')
+
+# Change the tag names and hex colors below to assign colors to specific tag badges
 tag_colors['athena'] = 'd3869b'
 tag_colors['parents_skype'] = '458588'
 tag_colors['politics'] = 'fb4934'

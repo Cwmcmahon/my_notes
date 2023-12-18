@@ -1,12 +1,15 @@
 # Workbench
 
-A simple brainstorming space, powered by the github frontend, a github action, and a simple python script.
+Thank you to [David Marx](https://github.com/dmarx) for coming up with the idea for this, which I have tweaked to work for me!
+
+This is a simple brainstorming space, powered by the github frontend, a github action, and a simple python script.
 
 # Setup
 
 1. Fork this repository
 2. Click on the "Actions" tab and activate github action workflows on your fork.
 3. Change the name of `README.stub.template` to `README.stub`
+4. Go to lines 54 through 66 in (./scripts/update_readme.py) and change the tag badge colors to your liking
 
 <!--
 2. Set "write" access on your `${{ secrets.GITHUB_TOKEN }}`, [instructions](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#configuring-the-default-github_token-permissions) here.
