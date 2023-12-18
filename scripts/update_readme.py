@@ -75,10 +75,11 @@ readme = None
 if Path('README.stub').exists():
     readme_stub = Path('README.stub').read_text()
     readme = readme_stub.replace('{TOC}', whole_toc)
-    readme = readme.replace('{tags}', all_tags).strip()
-    Path('README.md').write_text(readme)
+    readme = readme.replace('{tags}', all_tags).strip()    
 if not readme:
     readme = Path('empty.stub').read_text()
+
+Path('README.md').write_text(readme)
 
 tag_pages_badge_map = make_badges_map(tag_counts, tag_colors, root = '..')
 
