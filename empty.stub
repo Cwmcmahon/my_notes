@@ -4,6 +4,8 @@ Thank you to [David Marx](https://github.com/dmarx) for coming up with the idea 
 
 This is a simple brainstorming space, powered by the github frontend, a github action, and a simple python script.
 
+I have my notes in a private github repo that's the remote for a different branch of my local repo that this one is the remote for. [This](https://stackoverflow.com/a/62213595) is the guide I followed for setting it up!
+
 # Setup
 
 1. Click on the "Use this template" button in the top-right to create a new repo based on this one
