@@ -109,7 +109,8 @@ Path('README.md').write_text(readme)
 tag_pages_badge_map	= make_badges_map(tag_counts, tag_colors, root = '..')
 
 # Removing the old tag pages directory to clear out tag pages for tags that aren't used anymore
-shutil.rmtree('tags')
+if Path('tags').exists():
+	shutil.rmtree('tags')
 
 # Making a new tag pages directory and filling it with tag pages for each tag
 Path('tags').mkdir(exist_ok	= True)
