@@ -1,0 +1,4 @@
+= More tags example
+:keywords: athena, wedding, survey
+
+More tag color examples :)

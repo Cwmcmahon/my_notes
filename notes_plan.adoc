@@ -1,0 +1,20 @@
+= Notes Plan
+:keywords: project
+
+== To-do
+
+* [x] Common place notes
+* [x] pull color dictionary out of main script
+* [x] Fix manually deleting tag folders
+* [x] replace if "`README.md`" check with "`try list.remove`"
+* [x] Document update_readme.py
+* [x] Convert to AsciiDoc
+* [x] Modify README script for .adocs
+* [ ] Update public my_notes with:
+** [x] Info about folders
+** [x] How I do to-do
+** [x] Adjusting tag colors list
+** [x] Future plans
+** [ ] Change to asciidoc
+** [ ] New readme screenshot
+* [ ] Add deleted notes to archive?

@@ -1,0 +1,17 @@
+= Asciidoc Tables
+:keywords: common_place
+
+Not what I usually use this keyword for, but check out an Asciidoc table!
+
+[cols="50,30,20"]
+|===
+| Col 1 | Col 2 | Col 3
+
+| Placeholder Value 1
+| Value 2
+| 3
+
+| Another one
+| Another one
+| Another one
+
