@@ -1,0 +1,147 @@
+= Carter's Notes
+:toc:
+:toclevels: 1
+
+== Tags
+
+image:https://img.shields.io/badge/athena-d3869b[Static Badge,link=tags/athena.adoc]
+image:https://img.shields.io/badge/board_games-98971a[Static Badge,link=tags/board_games.adoc]
+image:https://img.shields.io/badge/common_place-a89984[Static Badge,link=tags/common_place.adoc]
+image:https://img.shields.io/badge/philosophy-d65d0e[Static Badge,link=tags/philosophy.adoc]
+image:https://img.shields.io/badge/politics-cc241d[Static Badge,link=tags/politics.adoc]
+image:https://img.shields.io/badge/project-458588[Static Badge,link=tags/project.adoc]
+image:https://img.shields.io/badge/survey-d79921[Static Badge,link=tags/survey.adoc]
+image:https://img.shields.io/badge/videogames-689d6a[Static Badge,link=tags/videogames.adoc]
+image:https://img.shields.io/badge/wedding-ebdbb2[Static Badge,link=tags/wedding.adoc]
+
+== link:board_games_to_get.adoc[Board Games to Get]
+image:https://img.shields.io/badge/board_games-98971a[Static Badge,link=tags/board_games.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+Roughly decreasing interest from top to bottom within each section
+
+== Competitive: Good with 2 Players
+
+* https://boardgamegeek.com/boardgame/355433/boop[Boop]
+* https://boardgamegeek.com/boardgame/284778/unmatched-jurassic-park-dr-sattler-vs-t-rex[Unmatched:
+Dr. Sattler vs T. Rex]
+* https://boardgamegeek.com/boardgame/194655/santorini[Santorini]
+* https://boardgamegeek.com/boardgame/140934/arboretum[Arboretum]
+* https://boardgamegeek.com/boardgame/357841/castles-sea[Castles by the
+Sea]
+* https://boardgamegeek.com/boardgame/342894/mythic-mischief[Mythic
+Mischief]
+* https://boardgamegeek.com/boardgame/249259/war-chest[War Chest]
+
+== Cooperative
+
+* https://boardgamegeek.com/boardgame/373106/sky-team[Sky Team]
+* https://boardgamegeek.com/boardgame/377470/sail[Sail]
+* https://boardgamegeek.com/boardgame/381297/unmatched-adventures-tales-amaze[Unmatched:
+Tales to Amaze]
+
+== Competitive: Best with >2 Players
+
+* https://boardgamegeek.com/boardgame/352574/fit-print[Fit to Print]
+* https://boardgamegeek.com/boardgame/342070/thunder-road-vendetta[Thunder
+Road: Vendetta]
+* https://boardgamegeek.com/boardgame/295905/cosmic-frog[Cosmic Frog]
+* https://boardgamegeek.com/boardgame/258779/planet-unknown[Planet
+Unknown]
+====
+
+== link:cassette_beasts_teams.adoc[Cassette Beasts Teams]
+image:https://img.shields.io/badge/videogames-689d6a[Static Badge,link=tags/videogames.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+== Main Options
+
+.Meredith
+* Triphinx (Astral bootleg)
+* Cat-5
+* Miss Mimic
+* Glastain
+* Aeroboros
+* Kingrave
+
+.Felix
+* Triphinx (Astral bootleg)
+* Fungogh
+* Miss Mimic
+* Glastain
+* Pyromeleon
+* Ripterra
+
+====
+
+== link:more_tags_example.adoc[More tags example]
+image:https://img.shields.io/badge/athena-d3869b[Static Badge,link=tags/athena.adoc]
+image:https://img.shields.io/badge/wedding-ebdbb2[Static Badge,link=tags/wedding.adoc]
+image:https://img.shields.io/badge/survey-d79921[Static Badge,link=tags/survey.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+More tag color examples :)
+====
+
+== link:notes_plan.adoc[Notes Plan]
+image:https://img.shields.io/badge/project-458588[Static Badge,link=tags/project.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+== To-do
+
+* [x] Common place notes
+* [x] pull color dictionary out of main script
+* [x] Fix manually deleting tag folders
+* [x] replace if "`README.md`" check with "`try list.remove`"
+* [x] Document update_readme.py
+* [x] Convert to AsciiDoc
+* [x] Modify README script for .adocs
+* [ ] Update public my_notes with:
+** [x] Info about folders
+** [x] How I do to-do
+** [x] Adjusting tag colors list
+** [x] Future plans
+** [ ] Change to asciidoc
+** [ ] New readme screenshot
+* [ ] Add deleted notes to archive?
+====
+
+== link:politics_and_philosophy.adoc[Politics and Philosophy]
+image:https://img.shields.io/badge/politics-cc241d[Static Badge,link=tags/politics.adoc]
+image:https://img.shields.io/badge/philosophy-d65d0e[Static Badge,link=tags/philosophy.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+This is a placeholder note to show what these tag colors look like!
+====
+
+== link:tables.adoc[Asciidoc Tables]
+image:https://img.shields.io/badge/common_place-a89984[Static Badge,link=tags/common_place.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+Not what I usually use this keyword for, but check out an Asciidoc table!
+
+[cols="50,30,20"]
+|===
+| Col 1 | Col 2 | Col 3
+
+| Placeholder Value 1
+| Value 2
+| 3
+
+| Another one
+| Another one
+| Another one
+
+====

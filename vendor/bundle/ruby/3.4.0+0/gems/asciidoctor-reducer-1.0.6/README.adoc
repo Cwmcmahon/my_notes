@@ -1,0 +1,407 @@
+= {project-name}
+Dan Allen <https://github.com/mojavelinux[@mojavelinux]>
+v1.0.6, 2024-02-12
+:idprefix:
+:idseparator: -
+ifndef::env-github[:icons: font]
+ifdef::env-github[]
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+:project-name: Asciidoctor Reducer
+:project-handle: asciidoctor-reducer
+:url-rvm: https://rvm.io
+:url-repo: https://github.com/asciidoctor/{project-handle}
+
+{project-name} is a tool that reduces an AsciiDoc document containing include directives to a single AsciiDoc document by expanding the includes reachable from the parent document.
+Additionally, the tool evaluates preprocessor conditionals (unless the option to preserve them is enabled), only keeping those lines from conditions which are true.
+If the document does not contain any preprocessor directives, the tool returns the unmodified source.
+
+== Prerequisites
+
+{project-name} is a Ruby application that you install using Ruby packaging.
+To install and run {project-name}, you need Ruby 2.7 or better.
+
+Run the following command to check which version of Ruby you have installed, if any:
+
+ $ ruby -v
+
+If Ruby is not installed, you can install it using {url-rvm}[RVM] (or, if you prefer, the package manager for your system).
+We generally recommend using RVM as it allows you to install gems without requiring elevated privileges or messing with system libraries.
+
+== Installation
+
+{project-name} is published to RubyGems.org as the gem named *{project-handle}*.
+
+You can install the latest version of the gem using the following command:
+
+ $ gem install asciidoctor-reducer
+
+Installing this gem makes the `asciidoctor-reducer` command available on your $PATH.
+You can also require the gem into the Ruby runtime to use it as a library or Asciidoctor extension.
+
+=== Project-scoped
+
+If you prefer to manage the application as a project-scoped dependency, you can declare the gem in the project's [.path]_Gemfile_:
+
+.Gemfile
+[,ruby]
+----
+source 'https://rubygems.org'
+
+gem 'asciidoctor-reducer'
+----
+
+You then install the gem using the `bundle` command:
+
+ $ bundle --path=.bundle/gems
+
+Installing the gem this way makes the `bundle exec asciidoctor-reducer` command available on your $PATH.
+
+== Usage
+
+=== Command
+
+You can run this tool using the provided command (i.e., CLI), named `asciidoctor-reducer`.
+To learn how to use the command, and to verify it's available, run the command with the `-h` option:
+
+ $ asciidoctor-reducer -h
+
+On the first line of the help text, you'll see a synopsis of the command:
+
+....
+asciidoctor-reducer [OPTION]... FILE
+....
+
+The argument `FILE` is the AsciiDoc file you want to reduce.
+The options, represented by `+[OPTION]...+`, are optional, as the name suggestions.
+
+Thus, to use the command, pass the AsciiDoc file as the sole argument:
+
+ $ asciidoctor-reducer input.adoc
+
+If you only want AsciiDoctor Reducer to process include directives, leaving preprocessor conditional directives untouched, add the `--preserve-conditionals` option:
+
+ $ asciidoctor-reducer --preserve-conditionals input.adoc
+
+By default, the command will output the reduced AsciiDoc document to the terminal (via stdout).
+To write the output to a file, specify an output file using the `-o` option:
+
+ $ asciidoctor-reducer -o output.adoc input.adoc
+
+The command can also read the input document from stdin instead of a file.
+To use the command in this way, pass `-` as the first argument:
+
+ $ cat input.adoc | asciidoctor-reducer -
+
+To write the output to a file in this case, specify an output file using the `-o` option:
+
+ $ cat input.adoc | asciidoctor-reducer -o output.adoc -
+
+=== API
+
+You can also use this tool from a Ruby application using the provided API.
+To begin, require the API for this library.
+
+[,ruby]
+----
+require 'asciidoctor/reducer/api'
+----
+
+Next, reduce a parent document that contains includes.
+This works without having to specify the safe mode since the default safe mode when using the API is `:safe`.
+
+[,ruby]
+----
+doc = Asciidoctor::Reducer.reduce_file 'sample.adoc'
+----
+
+Finally, you can retrieve the reduced source from the returned document.
+
+[,ruby]
+----
+puts doc.source
+----
+
+The benefit of this approach is that you can access the reduced source and the parsed document that corresponds to it.
+
+If you don't need the parsed document, you can retrieve the reduced source directly by passing the `String` type to the `:to` option:
+
+[,ruby]
+----
+puts Asciidoctor::Reducer.reduce_file 'sample.adoc', to: String
+----
+
+You can write the reduced source directly to a file by passing a file path to the `:to` option:
+
+[,ruby]
+----
+Asciidoctor::Reducer.reduce_file 'sample.adoc', to: 'sample-reduced.adoc'
+----
+
+== Extension
+
+Instead of using the API for this library, you can use the load API provided by Asciidoctor.
+If you want to register the extension globally, require the library as follows:
+
+[,ruby]
+----
+require 'asciidoctor/reducer'
+----
+
+When you use the Asciidoctor load API, the document will automatically be reduced.
+
+[,ruby]
+----
+puts (Asciidoctor.load_file 'sample.adoc', safe: :safe).source
+----
+
+If you want to keep the extension scoped to the call, require the library as follows:
+
+[,ruby]
+----
+require 'asciidoctor/reducer/extensions'
+----
+
+Next, use the extensions API to prepare an extension registry and pass it to the Asciidoctor load API:
+
+[,ruby]
+----
+puts (Asciidoctor.load_file 'sample.adoc', safe: :safe, extension_registry: Asciidoctor::Reducer.prepare_registry).source
+----
+
+Working with the extension directly is intended for low-level operations.
+Most of the time, you should use the API provided by this library.
+
+== How it Works
+
+{project-name} uses a collection of Asciidoctor extensions to rebuild the AsciiDoc source as a single document.
+Top-level include files in the input AsciiDoc document are resolved relative to current working directory.
+
+It starts by using a preprocessor extension to enhance the PreprocessorReader class to be notified each time an include is entered (pushed) or exited (popped).
+When an include directive is encountered, the enhanced reader stores the resolved lines and location of the include directive, thus keeping track of where those lines should be inserted in the original source.
+This information is stored as a stack, where each successive entry contains lines to be inserted into a parent entry.
+The enhanced reader also stores the location of preprocessor conditionals and whether the lines they enclose should be kept or dropped.
+
+The reducer then uses a tree processor extension to fold the include stack into a single sequence of lines.
+It does so by working from the end of the stack and inserting the lines into the parent until the stack has been flattened.
+As it goes, it also removes lines that have been excluded by the preprocessor conditionals as well as the directive lines themselves (unless the option to preserve conditionals has been specified).
+
+Finally, it loads the document again and returns it.
+The reduced source is available on the reconstructed document (via `Document#source` or `Document#source_lines`).
+
+=== Impact on Extensions
+
+If the sourcemap is enabled, and the reducer finds lines to replace or filter, the reducer will load the document again using `Asciidoctor.load`.
+This step is necessary to synchronize the sourcemap with the reduced source.
+This call will cause extensions that run during the load phase to be invoked again.
+An extension can check for this secondary load by checking for the `:reduced` option in the `Document#options` hash.
+If this option is set (the value of which will be `true`), then Asciidoctor is loading the reduced document.
+
+== Include Mapper (Experimental)
+
+One of the challenges of reducing a document is that interdocument xrefs that rely on the includes being registered in the document catalog no longer work.
+That's because when the reduced document is converted, it has no includes and thus all interdocument xrefs are colocated in the same source file.
+To work around this shortcoming, {project-name} provides a utility extension named the include mapper that will carry over the includes in the document catalog to the reduced document so they can be imported during conversion.
+
+CAUTION: The include mapper is experimental and thus subject to change.
+
+To use the include mapper when using the CLI to reduce the document, require it using the `-r` option as follows:
+
+ $ asciidoctor-reducer -r asciidoctor/reducer/include_mapper -o input-reduced.adoc input.adoc
+
+To use the include mapper when converting the reduced document, again require it using the `-r` option as follows:
+
+ $ asciidoctor -r asciidoctor/reducer/include_mapper input-reduced.adoc
+
+To use the include mapper when using the API, first require the extension:
+
+[,ruby]
+----
+require 'asciidoctor/reducer/include_mapper/extension'
+----
+
+You then need to register the extension when reducing the document:
+
+[,ruby]
+----
+Asciidoctor::Reducer.reduce_file 'sample.adoc', to: 'sample-reduced.adoc', extensions: proc {
+  next if document.options[:reduced]
+  tree_processor Asciidoctor::Reducer::IncludeMapper
+}
+----
+
+Then register it again when converting the reduced document:
+
+[,ruby]
+----
+Asciidoctor.convert_file 'sample-reduced.adoc', safe: :safe, extensions: proc {
+  tree_processor Asciidoctor::Reducer::IncludeMapper
+}
+----
+
+You can also register the extension globally:
+
+[,ruby]
+----
+require 'asciidoctor/reducer/include_mapper'
+----
+
+In this case, you don't have to pass it to the API explicitly.
+
+=== How it Works
+
+The include mapper works by adding a magic comment to the bottom of the reduced file.
+Here's an example of that comment:
+
+[,asciidoc]
+----
+//# includes=chapters/chapter-a,chapters/chapter-b
+----
+
+When a document that contains the magic comment is converted, the include mapper reads the comma-separated paths in the value and loads them into the includes table of the document catalog.
+
+== Reduce files in a GitHub repository
+
+It's well known that the AsciiDoc preview on GitHub does not support the include directive.
+With the help of GitHub Actions, Asciidoctor Reducer is ready-made to solve this problem.
+
+In order to set up this automated process, you need to first rename the source file to make room for the reduced file.
+Let's call the source file [.path]_README-source.adoc_ and the reduced file [.path]_README.adoc_.
+
+Next, create a GitHub Actions workflow file named [.path]_.github/workflows/reduce-readme.yml_ and populate it with the following contents:
+
+..github/workflows/reduce-readme.yml
+[,yaml]
+----
+name: Reduce README
+on:
+  push:
+    paths:
+    - README-source.adoc
+    branches: ['**']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    - name: Install Asciidoctor Reducer
+      run: sudo gem install asciidoctor-reducer
+    - name: Reduce README
+      # to preserve preprocessor conditionals, add the --preserve-conditionals option
+      run: asciidoctor-reducer -o README.adoc README-source.adoc
+    - name: Commit and Push README
+      uses: EndBug/add-and-commit@v9
+      with:
+        add: README.adoc
+----
+
+Now, each time you modify, commit, and push the [.path]_README-source.adoc_ file, the GitHub Action workflow will run, reduce that file, and push the reduced file back to the repository as [.path]_README.adoc_.
+
+If you want to trigger the workflow on changes to other files as well, add those paths or path patterns to the value of the `paths` key.
+
+== Development
+
+Follow the instructions below to learn how to help develop the project or test-drive the development version.
+
+=== Retrieve the source code
+
+Copy the {url-repo}[GitHub repository URL] and pass it to the `git clone` command:
+
+[subs=attributes+]
+ $ git clone {url-repo}
+
+Next, switch to the project directory:
+
+[subs=attributes+]
+ $ cd {project-handle}
+
+=== Install the dependencies
+
+The dependencies needed to use {project-name} are defined in the [.path]_Gemfile_ at the root of the project.
+You'll use Bundler to install these dependencies.
+
+Use the `bundle` command to install the project dependencies under the project directory:
+
+ $ bundle --path=.bundle/gems
+
+You must invoke `bundle` from the project's root directory so it can locate the [.path]_Gemfile_.
+
+=== Run the tests
+
+The test suite is located in the [.path]_spec_ directory.
+The tests are based on RSpec.
+
+==== Run all tests
+
+You can run all of the tests using Rake:
+
+ $ bundle exec rake spec
+
+For more fine-grained control, you can also run the tests directly using RSpec:
+
+ $ bundle exec rspec
+
+To run all tests in a single spec, point RSpec at the spec file:
+
+ $ bundle exec rspec spec/reducer_spec.rb
+
+==== Run specific tests
+
+If you only want to run a single test, or a group of tests, you can do so by tagging the test cases, then filtering the test run using that tag.
+
+Start by adding the `only` tag to one or more specifications:
+
+[source,ruby]
+----
+it 'should do something new', only: true do
+  expect(true).to be true
+end
+----
+
+Next, run RSpec with the `only` flag enabled:
+
+ $ bundle exec rspec -t only
+
+RSpec will only run the specifications that contain this flag.
+
+You can also filter tests by keyword.
+Let's assume we want to run all the tests that have `leveloffset` in the description.
+Run RSpec with the example filter:
+
+ $ bundle exec rspec -e leveloffset
+
+RSpec will only run the specifications that have a description containing the text `leveloffset`.
+
+=== Generate code coverage
+
+To generate a code coverage report when running tests using simplecov, set the `COVERAGE` environment variable as follows when running the tests:
+
+ $ COVERAGE=deep bundle exec rake spec
+
+You'll see a total coverage score, a detailed coverage report, and a link to HTML report in the output.
+The HTML report helps you understand which lines and branches were missed, if any.
+
+=== Run the development version
+
+When running the `asciidoctor-reducer` command from source, you must prefix the command with `bundle exec`:
+
+[subs=attributes+]
+ $ bundle exec asciidoctor-reducer sample.adoc
+
+To avoid having to do this, or to make the `asciidoctor-reducer` command available from anywhere, you need to build the development gem and install it.
+
+== Copyright and License
+
+Copyright (C) 2021-present Dan Allen.
+Use of this software is granted under the terms of the MIT License.
+
+See the link:LICENSE[LICENSE] for the full license text.
+
+== Trademarks
+
+AsciiDoc(R) and AsciiDoc Language(TM) are trademarks of the Eclipse Foundation, Inc.

@@ -1,0 +1,29 @@
+= `videogames` notes
+:toc:
+:toclevels: 1
+
+== link:../cassette_beasts_teams.adoc[Cassette Beasts Teams]
+image:https://img.shields.io/badge/videogames-689d6a[Static Badge,link=./videogames.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+== Main Options
+
+.Meredith
+* Triphinx (Astral bootleg)
+* Cat-5
+* Miss Mimic
+* Glastain
+* Aeroboros
+* Kingrave
+
+.Felix
+* Triphinx (Astral bootleg)
+* Fungogh
+* Miss Mimic
+* Glastain
+* Pyromeleon
+* Ripterra
+
+====

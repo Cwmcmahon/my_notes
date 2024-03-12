@@ -1,0 +1,271 @@
+= Asciidoctor Reducer Changelog
+:url-repo: https://github.com/asciidoctor/asciidoctor-reducer
+
+This document provides a curated view of the changes to Asciidoctor Reducer in each release.
+For a detailed view of what has changed, refer to the {url-repo}/commits/main[commit history] on GitHub.
+
+== 1.0.6 (2024-02-12) - @mojavelinux
+
+=== Fixed
+
+* Reduce single line conditionals inside file included by include directive with `leveloffset` attribute (#53)
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.6[git tag] | {url-repo}/compare/v1.0.5\...v1.0.6[full diff]
+
+== 1.0.5 (2022-10-15) - @mojavelinux
+
+=== Changed
+
+* Insert `role=include` into link macro that replaces include directive more carefully
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.5[git tag] | {url-repo}/compare/v1.0.4\...v1.0.5[full diff]
+
+== 1.0.4 (2022-10-15) - @mojavelinux
+
+=== Changed
+
+* Don't add role to link that replaces include directive if role is already present
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.4[git tag] | {url-repo}/compare/v1.0.3\...v1.0.4[full diff]
+
+== 1.0.3 (2022-09-22) - @mojavelinux
+
+=== Changed
+
+* Log error message if program cannot locate include directive to reduce (indicates a probable logic error in the program)
+
+=== Fixed
+
+* Reduce preprocessor directives in file included by include directive with `leveloffset` attribute (#45)
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.3[git tag] | {url-repo}/compare/v1.0.2\...v1.0.3[full diff]
+
+== 1.0.2 (2022-05-09) - @mojavelinux
+
+=== Fixed
+
+* Replace include and conditional directives inside a file that has been included partially (i.e., has an offset) (#43)
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.2[git tag] | {url-repo}/compare/v1.0.1\...v1.0.2[full diff]
+
+== 1.0.1 (2022-05-08) - @mojavelinux
+
+=== Changed
+
+* Use summary from gemspec in help text for `asciidoctor-reducer` command
+* Consistently access `source_lines` from document; use `#replace` to update
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.1[git tag] | {url-repo}/compare/v1.0.0\...v1.0.1[full diff]
+
+== 1.0.0 (2022-04-22) - @mojavelinux
+
+_No changes since previous release._
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0[git tag] | {url-repo}/compare/v1.0.0-rc.1\...v1.0.0[full diff]
+
+== 1.0.0-rc.1 (2022-04-22) - @mojavelinux
+
+_No changes since previous release._
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0-rc.1[git tag] | {url-repo}/compare/v1.0.0-beta.1\...v1.0.0-rc.1[full diff]
+
+== 1.0.0-beta.1 (2022-04-21) - @mojavelinux
+
+=== Changed
+
+* Add names of include files which have been included partially in include mapping comment and prefix names with ~
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0-beta.1[git tag] | {url-repo}/compare/v1.0.0.alpha.10\...v1.0.0-beta.1[full diff]
+
+== 1.0.0.alpha.10 (2022-04-21) - @mojavelinux
+
+=== Changed
+
+* Set Ruby 2.7 as minimum Ruby version
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.10[git tag] | {url-repo}/compare/v1.0.0.alpha.9\...v1.0.0.alpha.10[full diff]
+
+== 1.0.0.alpha.9 (2022-04-21) - @mojavelinux
+
+=== Added
+
+* Add `Asciidoctor::Reducer::IncludeMapper` auxiliary extension, required by `asciidoctor/reducer/include_mapper/extension` (#26)
+* Register `Asciidoctor::Reducer::IncludeMapper` extension when `asciidoctor/reducer/include_mapper` is required (#26)
+* Add `Asciidoctor::Reducer::Extensions.key` method that returns key for registering extension group
+* Update help text to note that the `-a` and `-r` CLI options may be specified multiple times
+* Automate the release process
+
+=== Changed
+
+* Rename x_include_replacements attr on reader to include_replacements since it's public
+* Don't pass `:to` option to `Asciidoctor.load_file`
+* Make `Asciidoctor::Reducer::Cli` a module instead of a class
+
+=== Fixed
+
+* Replace remote include with link if `allow-uri-read` attribute is not set
+* Don't raise error if `Asciidoctor::Reducer::Extensions.unregister` is called when extensions are not registered globally
+* Ensure output is written to file with universal newlines (\n) on Windows
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.9[git tag] | {url-repo}/compare/v1.0.0.alpha.8\...v1.0.0.alpha.9[full diff]
+
+== 1.0.0.alpha.8 (2022-02-23) - @mojavelinux
+
+=== Added
+
+* Add secure mode as value of `-S` CLI option (#31)
+* Add `--trace` option to CLI to trace cause of application errors (#29)
+
+=== Changed
+
+* Replace include directive with link macro if safe mode is secure (#31)
+* Track line numbers in include replacements using 1-based index
+* Only mix in preprocessor conditional tracker if `:preserve_conditionals` option is not set (#36)
+
+=== Fixed
+
+* Handle signals gracefully (#33)
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.8[git tag] | {url-repo}/compare/v1.0.0.alpha.7\...v1.0.0.alpha.8[full diff]
+
+== 1.0.0.alpha.7 (2022-02-14) - @mojavelinux
+
+=== Added
+
+* Add asciidoctor/reducer/api to require main API (#3)
+* Add `Asciidoctor::Reducer.reduce` and `Asciidoctor::Reducer.reduce_file` API methods (#3)
+* Add asciidoctor/reducer/extensions to require extensions API (#3)
+* Add `Asciidoctor::Reducer::Extensions` API (#3)
+
+=== Changed
+
+* Scope extensions to single call instead of registering them globally (#3)
+* Use `:safe` as the default safe mode when using the API
+* Make `CurrentPosition` module private to the `PreprocessorDirectiveTracker` module
+
+=== Fixed
+
+* Require asciidoctor/reducer/version automatically when `Asciidoctor::Reducer::VERSION` is accessed
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.7[git tag] | {url-repo}/compare/v1.0.0.alpha.6\...v1.0.0.alpha.7[full diff]
+
+== 1.0.0.alpha.6 (2022-02-10) - @mojavelinux
+
+=== Added
+
+* Add `-S`, `--safe-mode` option to CLI to set safe mode (#13)
+* Add `-r`, `--require` option to CLI to specify additional libraries to require before running (#17)
+
+=== Changed
+
+* Sort CLI options in help text, except for the `-h`, `--help` option
+* Update CLI to always use a new logger instance
+* Defer initializing logger until run method is called
+
+=== Fixed
+
+* Replace include directives that follow an unresolved include (#19)
+* Don't activate reducer extensions on reduced document
+* Prevent custom extension registry from activating extensions twice during reload (#21)
+* Retain includes table in document catalog when reloading document (#23)
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.6[git tag] | {url-repo}/compare/v1.0.0.alpha.5\...v1.0.0.alpha.6[full diff]
+
+== 1.0.0.alpha.5 (2022-02-06) - @mojavelinux
+
+=== Changed
+
+* Removing trailing empty lines after reducing when sourcemap is not enabled
+* Remove unnecessary override of lineno in preprocess_include_directive override
+* Simplify how include replacement target is tracked
+* Classify extensions in group named `:reducer`
+
+=== Fixed
+
+* Suppress log messages when reloading document (#14)
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.5[git tag] | {url-repo}/compare/v1.0.0.alpha.4\...v1.0.0.alpha.5[full diff]
+
+== 1.0.0.alpha.4 (2022-02-03) - @mojavelinux
+
+=== Fixed
+
+* Fix replacement of nested empty and unresolved includes
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.4[git tag] | {url-repo}/compare/v1.0.0.alpha.3\...v1.0.0.alpha.4[full diff]
+
+== 1.0.0.alpha.3 (2022-02-02) - @mojavelinux
+
+=== Changed
+
+* Rename PreprocessorReader ext module to PreprocessorReaderTracker
+* Encapsulate logic to enhance PreprocessorReader inside PreprocessorReaderTracker module
+* Only reload document if source lines have changed; otherwise, update source lines on reader directly
+* Change default safe mode for CLI to :unsafe
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.3[git tag] | {url-repo}/compare/v1.0.0.alpha.2\...v1.0.0.alpha.3[full diff]
+
+== 1.0.0.alpha.2 (2022-01-27) - @mojavelinux
+
+=== Added
+
+* Add `-a`, `--attribute` option to CLI for setting an AsciiDoc document attribute at runtime (#6)
+
+=== Changed
+
+* Reduce preprocessor conditionals by default; add option (`--preserve-conditionals`, `:preserve_conditionals`) to preserve them (#8)
+* Don't enable sourcemap automatically (#4)
+* Don't override logger by default; instead, rely on `:logger` API option to change logger
+* Add `--log-level` option to CLI to set severity level on logger (#9)
+* Add `-q`, `--quiet` option to CLI to suppress log messages (#9)
+* Reserve zero index in include replacements for top-level document
+
+=== Fixed
+
+* Preserve return value when overridding `preprocess_include_directive` method
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.2[git tag] | {url-repo}/compare/v1.0.0.alpha.1\...v1.0.0.alpha.2[full diff]
+
+== 1.0.0.alpha.1 (2022-01-12) - @mojavelinux
+
+Initial release.
+
+=== Details
+
+{url-repo}/releases/tag/v1.0.0.alpha.1[git tag]

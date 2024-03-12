@@ -1,0 +1,14 @@
+= `survey` notes
+:toc:
+:toclevels: 1
+
+== link:../more_tags_example.adoc[More tags example]
+image:https://img.shields.io/badge/athena-d3869b[Static Badge,link=./athena.adoc]
+image:https://img.shields.io/badge/wedding-ebdbb2[Static Badge,link=./wedding.adoc]
+image:https://img.shields.io/badge/survey-d79921[Static Badge,link=./survey.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+More tag color examples :)
+====

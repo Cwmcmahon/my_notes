@@ -1,0 +1,13 @@
+= `philosophy` notes
+:toc:
+:toclevels: 1
+
+== link:../politics_and_philosophy.adoc[Politics and Philosophy]
+image:https://img.shields.io/badge/politics-cc241d[Static Badge,link=./politics.adoc]
+image:https://img.shields.io/badge/philosophy-d65d0e[Static Badge,link=./philosophy.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+This is a placeholder note to show what these tag colors look like!
+====

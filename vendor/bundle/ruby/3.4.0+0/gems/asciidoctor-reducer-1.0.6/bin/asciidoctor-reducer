@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+asciidoctor_reducer_cli = File.join (File.dirname __dir__), 'lib/asciidoctor/reducer/cli.rb'
+require (File.file? asciidoctor_reducer_cli) ? asciidoctor_reducer_cli : 'asciidoctor/reducer/cli'
+exit Asciidoctor::Reducer::Cli.run

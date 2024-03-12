@@ -1,0 +1,41 @@
+= `board_games` notes
+:toc:
+:toclevels: 1
+
+== link:../board_games_to_get.adoc[Board Games to Get]
+image:https://img.shields.io/badge/board_games-98971a[Static Badge,link=./board_games.adoc]
+
+.Toggle note contents
+[%collapsible]
+====
+Roughly decreasing interest from top to bottom within each section
+
+== Competitive: Good with 2 Players
+
+* https://boardgamegeek.com/boardgame/355433/boop[Boop]
+* https://boardgamegeek.com/boardgame/284778/unmatched-jurassic-park-dr-sattler-vs-t-rex[Unmatched:
+Dr. Sattler vs T. Rex]
+* https://boardgamegeek.com/boardgame/194655/santorini[Santorini]
+* https://boardgamegeek.com/boardgame/140934/arboretum[Arboretum]
+* https://boardgamegeek.com/boardgame/357841/castles-sea[Castles by the
+Sea]
+* https://boardgamegeek.com/boardgame/342894/mythic-mischief[Mythic
+Mischief]
+* https://boardgamegeek.com/boardgame/249259/war-chest[War Chest]
+
+== Cooperative
+
+* https://boardgamegeek.com/boardgame/373106/sky-team[Sky Team]
+* https://boardgamegeek.com/boardgame/377470/sail[Sail]
+* https://boardgamegeek.com/boardgame/381297/unmatched-adventures-tales-amaze[Unmatched:
+Tales to Amaze]
+
+== Competitive: Best with >2 Players
+
+* https://boardgamegeek.com/boardgame/352574/fit-print[Fit to Print]
+* https://boardgamegeek.com/boardgame/342070/thunder-road-vendetta[Thunder
+Road: Vendetta]
+* https://boardgamegeek.com/boardgame/295905/cosmic-frog[Cosmic Frog]
+* https://boardgamegeek.com/boardgame/258779/planet-unknown[Planet
+Unknown]
+====
